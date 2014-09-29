@@ -1,0 +1,34 @@
+
+<% if @post.errors.any? %>
+<div class = 'row'>
+<div class = 'alert alert-error span8'>
+  <h5> Please fix errors: </h5>
+  <% @post.errors.full_messages.each do |msg| %>
+  <li>
+    <ul>
+  <%= msg %>
+    </ul>
+  </li>
+  <% end%>
+  </div>
+</div>
+<% end %>
+
+
+<div class ='well'>
+<!-- Rails Model Backed Forms  -->
+<%= form_for @post do |f| %> 
+<!-- @post object has to be set up in the controller --> 
+<!-- f is a form builder -->
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <%= f.label :description %>
+  <%= f.text_area :description, rows: 5 %>
+  <br>
+  <br>
+  <%= f.submit (@post.new_record? ? 'Create Post' : 'Update Post'), class: 'btn btn-primary' %>
+</div>
+
+<%end%>
