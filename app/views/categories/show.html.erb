@@ -5,23 +5,6 @@
 <!-- Code similar to Home page index.html.erb. Copy paste from there since we have a post object. Same thing. -->
 
 <% @category.posts.each do |post| %>
-  <div class = "row">
-    <div class ='span8 well'>
-      <h4><%= link_to post.title, post.url %></h4>
-      <p><%= post.description%></p>
-      <p>
-      <span class='quiet'>posted by</span> <%=post.user.username%>
-        <small> at <%= post.created_at%></small>
-      </p>
-      <small>
-        <span>
-          <%= link_to("#{post.comments.size} comments", post_path(post)) %> <!-- Show path for the comments -->
-          <br>
-          <%= link_to "Edit", edit_post_path(post) %>
-        </span>
-      </small>
-      
-    </div>
-  </div>
+  <%= render 'posts/post', post: post %>
 <%end%>
 
