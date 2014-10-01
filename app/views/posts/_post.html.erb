@@ -1,10 +1,5 @@
-<%= render 'share/content_title', title: "All Posts" %>
-
-
-<% @posts.each do |post| %>
-  <div class = "row">
+<div class = "row">
     <div class ='span8 well'>
-      <%= render post.categories %>
       <h4><%= link_to post.title, post.url %></h4>
       <p><%= post.description%></p>
       <p>
@@ -20,6 +15,6 @@
       </small>
       
     </div>
-  </div>
-<%end%>
+</div>
+
 

@@ -1,10 +1,12 @@
-<%= render 'share/content_title', title: "All Posts" %>
+<% all_posts = link_to('All Posts', posts_path) %>
 
+<%= render 'share/content_title', title: "#{all_posts} &raquo; #{@category.name}".html_safe %>
 
-<% @posts.each do |post| %>
+<!-- Code similar to Home page index.html.erb. Copy paste from there since we have a post object. Same thing. -->
+
+<% @category.posts.each do |post| %>
   <div class = "row">
     <div class ='span8 well'>
-      <%= render post.categories %>
       <h4><%= link_to post.title, post.url %></h4>
       <p><%= post.description%></p>
       <p>
