@@ -1,19 +1,4 @@
-
-<% if @post.errors.any? %>
-<div class = 'row'>
-<div class = 'alert alert-error span8'>
-  <h5> Please fix errors: </h5>
-  <% @post.errors.full_messages.each do |msg| %>
-  <li>
-    <ul>
-  <%= msg %>
-    </ul>
-  </li>
-  <% end%>
-  </div>
-</div>
-<% end %>
-
+<%= render 'share/errors', obj: @post %>
 
 <div class ='well'>
 <!-- Rails Model Backed Forms  -->
@@ -26,9 +11,19 @@
   <%= f.text_field :url %>
   <%= f.label :description %>
   <%= f.text_area :description, rows: 5 %>
+  
+  <%= f.label "Categories" %>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+  <% cb.label(class: "checkbox inline"){cb.check_box(class:"checkbox") + cb.text} %>
+  <%end%>
   <br>
   <br>
   <%= f.submit (@post.new_record? ? 'Create Post' : 'Update Post'), class: 'btn btn-primary' %>
 </div>
 
 <%end%>
+
+
+
+
+

@@ -8,6 +8,50 @@
     <%= link_to 'New Post', new_post_path, class: 'btn btn-success btn-small' %>
   </div>
 
+  
+<% if logged_in? %>
+  <div class = 'nav_item'>
+    <%= link_to 'Logout', logout_path, class: 'btn btn-small' %>
+  </div>
+
+<!-- Logged in User Toggle for Edit and Show -->
+  <div class = 'btn-group nav_item'> <!-- has to be a btn-group for drop down to work -->
+    <%= link_to('', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown') do %>
+      <%= current_user.username %>
+      <span class='caret'></span>
+    <%end%>
+    <ul class='dropdown-menu'>
+      <li> <!-- if you want 2 things done to link path i.e. change name and use a symbol use link_to 'desired path' do => then next lines input desired actions -->
+        <%= link_to edit_user_path(current_user) do %>
+          <i class = 'icon-pencil'></i>
+          Edit Profile
+        <%end%> 
+      </li>
+      <li>
+        <%= link_to user_path(current_user) do%>
+          <i class = 'icon-user'></i>
+          View Profile
+        <%end%>
+      </li>
+      <li>
+        <%= link_to logout_path do %>
+        <i class= 'icon-circle-arrow-left'></i>
+        Log Out
+        <%end%>
+      </li>
+    </ul>
+  </div>
+
+
+<% else %>
+  <div class = 'nav_item'>
+    <%= link_to 'Login', login_path, class: 'btn btn-small' %>
+  </div>
+  <div class = 'nav_item'>
+    <%= link_to 'Register', new_user_path, class: 'btn btn-success btn-small' %>
+  </div>
+<%end%>
+
 <!-- Twitter Bootstrap -->
   <div class = 'btn-group nav_item'>
     <%= link_to '#', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown' do %>

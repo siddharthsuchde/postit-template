@@ -20,3 +20,29 @@
 
 <hr/>
 
+<!-- obj is @comment not @post b/c @comment gets saved to databse in Controller action -->
+<%= render 'share/errors', obj:@comment %>
+  <!-- New syntax for form builder as @comment is a nested route -->
+  <!-- Also since nested route need to ensure a Posts path for Create action is set in Controller -->
+<% if logged_in? %>
+<%= form_for [@post, @comment] do |f| %> <!-- want URL to be /posts/:id/comments that's why new syntax -->
+  <%= f.label :body, 'Leave a Comment' %>
+  <%= f.text_area :body, rows: 5 %>
+  <br>
+  <%= f.submit "Create Comment", class: 'btn btn-primary' %>
+<%end%>
+<%end%>
+
+
+
+
+<% @post.comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment, show_post: false %>
+<%end%>
+ 
+
+
+
+
+
+

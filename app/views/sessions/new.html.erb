@@ -1,0 +1,15 @@
+<%= render 'share/content_title', title: "Login" %>
+
+<!-- From Rails Form Helpers create a Basic Form -->
+
+<%= form_tag "/login" do %>
+<div class = "well">
+  <%= label_tag :username %>
+  <%= text_field_tag :username %> 
+  <%= label_tag :password %>
+  <%= text_field_tag :password %> <br> <br>
+  <%= submit_tag "Login", class: "btn btn-primary" %>
+<%end%>
+</div>
+
+

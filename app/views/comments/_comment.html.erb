@@ -1,0 +1,30 @@
+<!-- the only object available to us is 'comment'. Therefore if we want to access a Post title or a Username from a User we need to Traverse the Dom and get it. i.e. with comment.post.title or comment.user.usernmane etc.  -->
+<div class = 'row'>
+  <div class = 'span0 well text-center'> <!-- link_to only fetches GET routes, need a POST route therefore method: post -->
+    <!-- has to be comment.post because we are in the comments partial and vote_post_comment requires 2 parameters -->
+    <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post' do %>
+      <i class = 'icon-arrow-up'></i>
+    <%end%>
+    <br>
+    <%= comment.total_votes %>
+    <br>
+    <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post' do %>
+      <i class = 'icon-arrow-down'></i>
+    <% end %>
+  
+  </div>
+  
+  
+  
+  
+  <div class= 'span8 well'>              
+    <em><%= "#{comment.body}" %></em>  
+    <% if show_post %>
+      on <%= link_to comment.post.title, post_path(comment.post) %>
+    <% end%>
+    <p>
+      <span class='quiet'>by</span> <%=comment.user.username%>
+      <small> at <%= date_time(comment.created_at) %></small>
+    </p>
+  </div>
+</div>
