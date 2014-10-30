@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
   # 1. set up something
   # 2. redirect away from action e.g. only registered users should be allowed to edit/create new posts
-  # so redirect away from action if require_users condition not met
+  # so redirect away from action if require_users condition not met i.e. somebody cannot type in /edit in the uRL and edit a post! 
   before_action :require_users, except: [:index, :show]
   
   def index

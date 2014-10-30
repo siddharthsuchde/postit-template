@@ -8,8 +8,9 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(user_params)
     
+    @user = User.new(user_params)
+    # to login automatically post registering: session[:user_id] = @user.id
     if @user.save
       flash[:notice] = "Congratulations, You have Successfully Registered"
       redirect_to root_path
