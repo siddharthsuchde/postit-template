@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   
   # User.find(nil) is when session[:user_id] = nil in destroy action! it will throw an error. check rails console
   # hence only find a User if session[:user_id] is true 
+  # memoization states that if @current_user exists do NOT execute code on the right
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
