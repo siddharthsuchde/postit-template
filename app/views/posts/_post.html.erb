@@ -1,16 +1,16 @@
 <div class = "row">
   <div class = 'span0 well text-center'> 
     <!-- generated via routes.rb file. vote_path_path(post) opens itself to a URL post/id/vote which is the URL endpoint we are after. However, it's a POST HTTP request not a GET. When you make a POST request, DELETE, PATCH etc Rails uses Java Script to submit a form for you. By adding method: 'post' Rails is automatically submitting a Form in the background. In the front end you notice a a data-method which builds a form on the fly and submits the parameters for you -->
-    <%= link_to vote_post_path(post, vote: true), method: 'post', remote: true do %>
+    <%= link_to vote_post_path(post.to_params, vote: true), method: 'post', remote: true do %>
       <% if logged_in? %>
       <i class = 'icon-arrow-up'></i>
       <%end%>
     <%end%>    
 <br>
-    <span id= 'post_<%post.id%>_votes' ><%= post.total_votes %> </span>
+    <span id= 'post_<%=post.to_params%>_votes' ><%= post.total_votes %> </span>
 <br>
     
-    <%= link_to vote_post_path(post, vote: false), method: 'post', remote: true do %>
+    <%= link_to vote_post_path(post.to_params, vote: false), method: 'post', remote: true do %>
       <%if logged_in? %>
       <i class = 'icon-arrow-down'></i>
       <%end%>
@@ -29,7 +29,7 @@
       </p>
       <small>
         <span>
-          <%= link_to("#{post.comments.size} comments", post_path(post)) %> <!-- Show path for the comments -->
+          <%= link_to("#{post.comments.size} comments", post_path(post.to_params)) %> <!-- Show path for the comments -->
           <br>
           <%= link_to "Edit", edit_post_path(post) if logged_in? %>
         </span>

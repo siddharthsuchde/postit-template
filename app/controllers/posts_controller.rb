@@ -5,12 +5,13 @@ class PostsController < ApplicationController
   # 1. set up something
   # 2. redirect away from action e.g. only registered users should be allowed to edit/create new posts
   # so redirect away from action if require_users condition not met i.e. somebody cannot type in /edit in the uRL and edit a post! 
-  before_action :require_users, except: [:index, :show]
+  before_action :require_users, except: [:index, :show, :edit, :update]
+  before_action :require_creator, only: [:edit, :update]
   
   def index
     @posts = Post.all
-  
   end
+  
   #before_action used before show action
   def show
     #we need the @comment object in the show.html template to create a form
@@ -58,6 +59,7 @@ class PostsController < ApplicationController
   # voteable at post b/c this is the Posts controller
   # params[:vote] you get from binding pry to see if try or false
   def vote
+    
     @vote = Vote.create(voteable: @post, user: current_user, vote: params[:vote])
      
     respond_to do |format|
@@ -85,7 +87,16 @@ class PostsController < ApplicationController
   
   #taken from before_action
   def set_post
-    @post = Post.find(params[:id]) #common code in show, edit, update actions
+    
+    @post = Post.find_by(slug: params[:id]) #common code in show, edit, update actions
   end
+  
+  def require_creator
+    unless logged_in? && (@post.user == current_user || current_user.admin?)
+      flash[:error] = "You cannot perform this action"
+      redirect_to root_path
+    end
+  end
+  
   
 end
