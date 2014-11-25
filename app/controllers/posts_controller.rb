@@ -18,6 +18,14 @@ class PostsController < ApplicationController
     #if we do not create a comment in the Controller Action which renders the template
     #the object - @comment - in the form will be nil
     @comment = Comment.new 
+    
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @post
+      end
+    end
+    
   end
   
   def new

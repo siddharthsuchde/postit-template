@@ -5,7 +5,7 @@
   <%= f.label :password %>
   <%= f.password_field :password %>
   <%= f.label :time_zone %>
-  <%= f.time_zone_select :time_zone %>
+  <%= f.time_zone_select :time_zone, default: Time.zone.name %>
   <br>
   <br>
   <%= f.submit (@user.new_record? ? 'Register' : 'Update Profile'), class: 'btn btn-primary' %> 
