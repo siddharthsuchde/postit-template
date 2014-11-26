@@ -5,7 +5,7 @@ class Category < ActiveRecord::Base
   validates :name, presence: true
   before_save :generate_slug
   
-  def to_params
+  def to_param
     generate_slug
   end
   

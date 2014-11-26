@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
   
   
 
-  def to_params
+  def to_param
     generate_slug
   end
   
